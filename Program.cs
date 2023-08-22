@@ -7,6 +7,35 @@
 
 // b1 = 2, k1 = 5, b2 = 4, k2 = 9 -> (-0,5; -0,5)
 
-Console.WriteLine("Введите последовательность чисел: ");
-string Subs = Console.ReadLine()!;
+Console.WriteLine("Введите последовательность чисел через пробел: ");
+string StVal = Console.ReadLine()!;
+Console.WriteLine($"Чисел больше нуля: {GetNumber(GetArray(StVal))}");
 
+int[] GetArray(string StNum)  // метод получения массива из строки чисел
+{
+    int Count = 1;
+    foreach (var ch in StNum) if (ch == ' ') Count += 1;
+    int[] Array = new int[Count];
+    int j = 0;
+    for (int i = 0;i<Count; i++)
+    {
+        string Str = "";
+        for (; StNum[j] != ' '; j++)
+        {
+            Str += StNum[j];
+            if (j==StNum.Length -1) break;
+        }
+        Array[i] = int.Parse(Str);
+        j++;
+    }
+    return Array;
+}
+int GetNumber(int[] Array)  //метод получения количества чисел больших 0 в массиве
+{
+    int Num =0;
+    foreach (int item in Array)
+    {
+        Num += item > 0? 1:0;
+    }
+    return Num;
+}
